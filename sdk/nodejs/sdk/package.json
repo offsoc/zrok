@@ -40,6 +40,6 @@
   },
   "dependencies": {
     "@openziti/ziti-sdk-nodejs": "^0.20.0",
-    "express": "^4.21.2"
+    "express": "^5.1.0"
   }
 }
