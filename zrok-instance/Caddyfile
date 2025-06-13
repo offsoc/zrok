@@ -4,11 +4,11 @@
 	admin 0.0.0.0:2019
 }
 
-http:// {
-	redir https://{host}{uri} permanent
-}
+# http:// {
+# 	redir https://{host}{uri} permanent
+# }
 
-*.{$ZROK_DNS_ZONE} {
+*.{$ZROK_DNS_ZONE}:{$CADDY_HTTPS_PORT} {
 	tls {
 		dns {$CADDY_DNS_PLUGIN} {$CADDY_DNS_PLUGIN_TOKEN}
 		propagation_timeout 60m
@@ -22,7 +22,7 @@ http:// {
 
 	# ziti administration console uses :443 for the benefit of a web UI cert and accesses the ziti edge-management API
 	@ziti host ziti.{$ZROK_DNS_ZONE}
-	reverse_proxy @ziti ziti-quickstart:{$ZITI_CTRL_ADVERTISED_PORT:1280} {
+	reverse_proxy @ziti ziti-quickstart:{$ZITI_CTRL_ADVERTISED_PORT:80} {
 		transport http {
 			tls_insecure_skip_verify
 		}
